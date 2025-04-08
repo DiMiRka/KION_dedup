@@ -1,0 +1,20 @@
+[project]
+name = "kion"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "DiMiRka",email = "fallen_94@bk.ru"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi[uvicorn] (>=0.115.12,<0.116.0)",
+    "pydantic-settings (>=2.8.1,<3.0.0)",
+    "redis (>=5.2.1,<6.0.0)",
+    "uvicorn (>=0.34.0,<0.35.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
