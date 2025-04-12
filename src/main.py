@@ -11,6 +11,6 @@ app.include_router(api_router)
 if __name__ == '__main__':
     print(uvicorn_options)
     uvicorn.run(
-        'main:src',
+        'src.main:app',
         **uvicorn_options
     )

@@ -1,17 +1,20 @@
 import multiprocessing
+import os
+
 from pydantic import PostgresDsn
 from pydantic_core import MultiHostUrl
 from pydantic_settings import BaseSettings
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class AppSettings(BaseSettings):
-    postgres_dsn: PostgresDsn = MultiHostUrl(
-        'postgresql+asyncpg://postgres:dima-784512@localhost:5432/snippet')
+    postgres_dsn: PostgresDsn = MultiHostUrl(os.getenv("PG_LINK"))
     app_port: int = 8000
     app_host: str = 'localhost'
     reload: bool = True
     cpu_count: int | None = None
-    jwt_secret: str = 'your_super_secret'
     algorithm: str = 'HS256'
 
     class Config:
@@ -21,7 +24,6 @@ class AppSettings(BaseSettings):
 
 app_settings = AppSettings()
 
-# набор опций для запуска сервера
 uvicorn_options = {
     "host": app_settings.app_host,
     "port": app_settings.app_port,
