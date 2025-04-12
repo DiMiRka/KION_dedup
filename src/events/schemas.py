@@ -1,6 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Optional
-from datetime import datetime, date
+from typing import Optional
 
 
 class Event(BaseModel):
@@ -10,8 +9,8 @@ class Event(BaseModel):
     user_agent: str = ""
     screen: str = ""
     event_datetime_str: str = ""
-    event_datetime: datetime
-    event_date: date
+    event_datetime: str
+    event_date: str
     auth_method: str = ""
     auth_type: str = ""
     request_id: str = ""
@@ -51,7 +50,7 @@ class Event(BaseModel):
     discount: str = ""
     is_trial: Optional[int]
     price: int = 0
-    dt_add: datetime
+    dt_add: str
     url_user_event: str = ""
     event_receive_timestamp: int = 0
     event_receive_dt_str: str = ""
@@ -64,13 +63,13 @@ class Event(BaseModel):
     dl: str = ""
     fp: str = ""
     dr: str = ""
-    mc: int = 0
+    mc: Optional[int]
     r: str
     sc: int = 0
     sid: str
     sr: str = ""
     title: str = ""
-    ts: Optional[datetime]
+    ts: Optional[str]
     wr: str = ""
     cid: str = ""
     uid: str = ""
@@ -92,7 +91,7 @@ class Event(BaseModel):
     field_action: str = ""
     search_films: str = ""
     recommended_films: str = ""
-    event_datetime_msc: Optional[datetime]
+    event_datetime_msc: Optional[str]
     user_device_is_tv: int = 0
     input_type: str = ""
     product_names: str = ""
@@ -135,7 +134,7 @@ class Event(BaseModel):
     uuid: str = ""
     term: str = ""
     playing_mode: str = ""
-    inserted_dt: Optional[datetime]
+    inserted_dt: Optional[str]
     build_model: str = ""
     build_manufacturer: str = ""
     extra_field: str = ""

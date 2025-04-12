@@ -1,6 +1,6 @@
 from typing import Union, Callable, Annotated
 from fastapi import Depends
-from sqlalchemy.ext.asyncio import (async_sessionmaker,create_async_engine,
+from sqlalchemy.ext.asyncio import (async_sessionmaker, create_async_engine,
                                     AsyncSession, AsyncEngine, AsyncConnection)
 
 from src.core.config import app_settings
@@ -21,7 +21,6 @@ async def get_async_session() -> AsyncSession:
 def create_sessionmaker(
         bind_engine: Union[AsyncEngine, AsyncConnection]
 ) -> Callable[..., async_sessionmaker]:
-    # Возвращается фабрика сессий, определённая с заданными параметрами
     return async_sessionmaker(
         bind=bind_engine,
         expire_on_commit=False,
