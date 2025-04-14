@@ -13,4 +13,3 @@ class BloomFilter(object):
 
         self.number_hash_functions = round((self.size / self.number_expected_elements) * math.log(2))
 
-

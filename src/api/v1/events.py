@@ -7,7 +7,7 @@ from src.events.services import create_dedup_key_redis, dedup_redis, db_create_e
 events_router = APIRouter(prefix="/events", tags=['events'])
 
 
-@events_router.post("/event")
+@events_router.post("/event_post")
 async def post_event(db: db_dependency, event: Event):
     event = event.dict()
     key = await create_dedup_key_redis(event)

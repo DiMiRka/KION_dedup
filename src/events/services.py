@@ -6,6 +6,7 @@ import json
 
 from src.database import db_dependency
 from src.models.models import ProductEvent
+from src.redisconf import r
 
 load_dotenv()
 
@@ -16,7 +17,6 @@ async def create_dedup_key_redis(event: dict):
 
 
 async def dedup_redis(dkey: str):
-    r = redis.from_url(os.getenv("REDIS_URL"))
     if not await r.hexists(name='dedup', key=dkey):
         await r.hset(name='dedup', key=dkey, value=dkey)
         return True
@@ -25,7 +25,6 @@ async def dedup_redis(dkey: str):
 
 
 async def db_create_event(db: db_dependency, event: dict):
-    print("Успех")
     event_type = event["event_name"]
     client_id = event["client_id"]
     event_data = json.dumps(event)
