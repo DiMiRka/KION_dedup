@@ -1,8 +1,7 @@
-import os
-import redis.asyncio as redis
 import xxhash
 from dotenv import load_dotenv
 import json
+from sqlalchemy.future import select
 
 from src.database import db_dependency
 from src.models.models import ProductEvent
@@ -17,8 +16,8 @@ async def create_dedup_key_redis(event: dict):
 
 
 async def dedup_redis(dkey: str):
-    if not await r.hexists(name='dedup', key=dkey):
-        await r.hset(name='dedup', key=dkey, value=dkey)
+    if not await r.exists(dkey):
+        await r.set(name=dkey, value=dkey, ex=36288000)
         return True
     else:
         return False
@@ -33,3 +32,8 @@ async def db_create_event(db: db_dependency, event: dict):
     await db.commit()
     await db.refresh(db_event)
     return db_event
+
+
+async def db_get_events(db: db_dependency):
+    result = await db.execute(select(ProductEvent))
+    return result.scalars().all()

@@ -1,13 +1,7 @@
-from locust import HttpUser, TaskSet, task, between
-import json
+from locust import HttpUser, task, between
 from dotenv import load_dotenv
-from sqlalchemy import null, false
 
 load_dotenv()
-
-
-class EvenPostTest(TaskSet):
-    pass
 
 
 class APIdedup(HttpUser):
@@ -29,4 +23,3 @@ class APIdedup(HttpUser):
                 return response.success
             else:
                 response.failure(f'status code is {response.status_code}')
-
