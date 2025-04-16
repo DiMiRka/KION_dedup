@@ -6,18 +6,23 @@ from sqlalchemy.future import select
 from src.database import db_dependency
 from src.models.models import ProductEvent
 from src.redisconf import r
+from src.bloomfilter import bf
 
 load_dotenv()
 
 
-async def create_dedup_key_redis(event: dict):
-    key = f"{event['client_id']} | {event['event_datetime']} | {event['event_name']} | {event['product_id']} | {event['sid']} | {event['r']}"
-    return xxhash.xxh3_64(key).hexdigest()
-
-
-async def dedup_redis(dkey: str):
+async def dedup_redis(key: str):
+    dkey = xxhash.xxh3_64(key).hexdigest()
     if not await r.exists(dkey):
         await r.set(name=dkey, value=dkey, ex=36288000)
+        return True
+    else:
+        return False
+
+
+async def dedup_bloom(key: str):
+    if not await bf.check(key):
+        await bf.add(key)
         return True
     else:
         return False
