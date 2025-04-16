@@ -1,7 +1,7 @@
 import multiprocessing
 import os
 
-from pydantic import PostgresDsn
+from pydantic import PostgresDsn, RedisDsn
 from pydantic_core import MultiHostUrl
 from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
@@ -11,6 +11,7 @@ load_dotenv()
 
 class AppSettings(BaseSettings):
     postgres_dsn: PostgresDsn = MultiHostUrl(os.getenv("PG_LINK"))
+    redis_dsn:RedisDsn = MultiHostUrl(os.getenv("REDIS_URL"))
     app_port: int = 8000
     app_host: str = 'localhost'
     reload: bool = True

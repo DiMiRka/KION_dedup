@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-from src.database import db_dependency
+from src.core.database import db_dependency
 from src.events.schemas import Event
 from src.events.services import dedup_redis, db_create_event, db_get_events, dedup_bloom
 
@@ -15,10 +15,13 @@ events_router = APIRouter(prefix="/events", tags=['events'])
 })
 async def post_event(db: db_dependency, event: Event):
     event = event.dict()
+
+    # Take unique event fields for deduplication
     key = f"{event['client_id']} | {event['event_datetime']} | {event['event_name']} | {event['product_id']} | {event['sid']} | {event['r']}"
-    if await dedup_redis(key):
-        if await dedup_bloom(key):
-            await db_create_event(db, event)
+
+    if await dedup_redis(key):  # Check hash in redis
+        if await dedup_bloom(key):  # Check event in bloom filter
+            await db_create_event(db, event)  # Add Event to Database
             return f"Event added {event}"
         else:
             return "Duplicate filtered out"

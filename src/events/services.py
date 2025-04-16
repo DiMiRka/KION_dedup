@@ -1,17 +1,15 @@
 import xxhash
-from dotenv import load_dotenv
 import json
 from sqlalchemy.future import select
 
-from src.database import db_dependency
+from src.core.database import db_dependency
 from src.models.models import ProductEvent
-from src.redisconf import r
-from src.bloomfilter import bf
-
-load_dotenv()
+from src.core.redisconf import r
+from src.events.bloomfilter import bf
 
 
 async def dedup_redis(key: str):
+    """First stage of deduplication. Redis hash"""
     dkey = xxhash.xxh3_64(key).hexdigest()
     if not await r.exists(dkey):
         await r.set(name=dkey, value=dkey, ex=36288000)
@@ -21,6 +19,7 @@ async def dedup_redis(key: str):
 
 
 async def dedup_bloom(key: str):
+    """The second stage of deduplication. Bloom filter"""
     if not await bf.check(key):
         await bf.add(key)
         return True
@@ -29,6 +28,7 @@ async def dedup_bloom(key: str):
 
 
 async def db_create_event(db: db_dependency, event: dict):
+    """Add event to database"""
     event_type = event["event_name"]
     client_id = event["client_id"]
     event_data = json.dumps(event)
@@ -40,5 +40,6 @@ async def db_create_event(db: db_dependency, event: dict):
 
 
 async def db_get_events(db: db_dependency):
+    """Get all events from the database"""
     result = await db.execute(select(ProductEvent))
     return result.scalars().all()
