@@ -2,10 +2,10 @@ import xxhash
 import json
 from sqlalchemy.future import select
 
-from src.core.database import db_dependency
-from src.models.models import ProductEvent
-from src.core.redisconf import r
-from src.events.bloomfilter import bf
+from core.database import db_dependency
+from models.models import ProductEvent
+from core.redisconf import r
+from events.bloomfilter import bf
 
 
 async def dedup_redis(key: str):

@@ -1,5 +1,5 @@
 import redis.asyncio as redis
-from src.core.config import app_settings
+from core.config import app_settings
 
 
 POOL = redis.ConnectionPool.from_url(app_settings.redis_dsn.unicode_string())

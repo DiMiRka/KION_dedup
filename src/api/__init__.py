@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from src.api.v1.events import events_router
+from api.v1.events import events_router
 
 api_router = APIRouter()
 

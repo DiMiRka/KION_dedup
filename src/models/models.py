@@ -2,7 +2,7 @@ from datetime import datetime
 from sqlalchemy import TIMESTAMP, JSON
 from sqlalchemy.orm import Mapped, mapped_column
 
-from src.models.base import Base
+from models.base import Base
 
 
 class ProductEvent(Base):
