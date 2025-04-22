@@ -3,5 +3,4 @@ __all__ = [
     "ProductEvent"
 ]
 
-from .base import Base
-from .models import ProductEvent
+from .events import Base, ProductEvent

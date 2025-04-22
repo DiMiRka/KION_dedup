@@ -13,7 +13,7 @@ class AppSettings(BaseSettings):
     postgres_dsn: PostgresDsn = MultiHostUrl(os.getenv("PG_LINK"))
     redis_dsn:RedisDsn = MultiHostUrl(os.getenv("REDIS_URL"))
     app_port: int = 8000
-    app_host: str = 'localhost'
+    app_host: str = '0.0.0.0'
     reload: bool = True
     cpu_count: int | None = None
     algorithm: str = 'HS256'

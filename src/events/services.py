@@ -3,7 +3,7 @@ import json
 from sqlalchemy.future import select
 
 from core.database import db_dependency
-from models.models import ProductEvent
+from models.events import ProductEvent
 from core.redisconf import r
 from events.bloomfilter import bf
 
@@ -40,6 +40,6 @@ async def db_create_event(db: db_dependency, event: dict):
 
 
 async def db_get_events(db: db_dependency):
-    """Get all events from the database"""
-    result = await db.execute(select(ProductEvent))
+    """Get last 25 events from the database"""
+    result = await db.execute(select(ProductEvent).order_by(ProductEvent.id.desc()).limit(30))
     return result.scalars().all()
