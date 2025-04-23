@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException
 
-from core import db_dependency
-from schemas import Event
-from services import dedup_redis, db_create_event, db_get_events, dedup_bloom
+from src.core import db_dependency
+from src.schemas import Event
+from src.services import dedup_redis, db_create_event, db_get_events, dedup_bloom
 
 events_router = APIRouter(prefix="/events", tags=['events'])
 

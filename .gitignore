@@ -3,4 +3,3 @@ venv
 *.tmp
 *.bak
 .idea/
-__pycache__/
