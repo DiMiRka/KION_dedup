@@ -125,7 +125,7 @@ KION_dedup/
 - POSTGRES_DB - имя базы данных PostgreSQL
 
 ## Использование
-После запуска сервис будет доступен по адресу http://localhost:8000.\
+После запуска сервис будет доступен по адресу http://localhost:8000. \
 Документация API (Swagger UI) доступна по адресу http://localhost:8000/api/openapi.
 
 ### API Endpoints 
