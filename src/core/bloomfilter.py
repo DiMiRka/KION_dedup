@@ -2,7 +2,7 @@ import math
 import mmh3
 from bitarray import bitarray
 
-from core.redisconf import r
+from core import r
 
 
 class BloomFilter(object):

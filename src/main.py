@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
 
-from core.config import uvicorn_options
+from core import uvicorn_options
 from api import api_router
 
 app = FastAPI(docs_url="/api/openapi")
