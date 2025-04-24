@@ -332,13 +332,13 @@ http://localhost:8089
 
 #### Графики производительности
 **RPS (запросов в секунду)**
-![График запросов в секунду](src\tests\screenshots\rps.png)
+![График запросов в секунду](src/tests/screenshots/rps.png)
 
 **Response Times (время ответа)**
-![График времени ответа](src\tests\screenshots\response_times.png)
+![График времени ответа](src/tests/screenshots/response_times.png)
 
 **Numbers of Users (количество пользователей)**
-![График количества пользователей](src\tests\screenshots\numbers_of_users.png)
+![График количества пользователей](src/tests/screenshots/numbers_of_users.png)
 
 #### Выводы
 1. Система стабильно обрабатывает **~700 запросов/сек** при 300 одновременных пользователях
