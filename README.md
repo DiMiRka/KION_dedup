@@ -288,8 +288,7 @@ KION_dedup/
 ### Запуск тестирования
 1. Запустите тестирование:
     ```bash
-    locust -f src/tests/locusttest.py --host=http://localhost:8000  # Локально
-   как запустить в Docker еще не успел изучить, планирую добавить
+    locust -f src/tests/locusttest.py --host=http://localhost:8000
     ```
 2. Откройте веб-интерфейс Locust:
 http://localhost:8089
