@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, Union
 
 
 class Event(BaseModel):
@@ -65,7 +65,7 @@ class Event(BaseModel):
     dr: str = ""
     mc: Optional[int]
     r: str
-    sc: int = 0
+    sc: Union[int, None] = 0
     sid: str
     sr: str = ""
     title: str = ""

@@ -41,5 +41,5 @@ async def db_create_event(db: db_dependency, event: dict):
 
 async def db_get_events(db: db_dependency):
     """Get last 25 events from the database"""
-    result = await db.execute(select(ProductEvent).order_by(ProductEvent.id.desc()).limit(50))
+    result = await db.execute(select(ProductEvent).order_by(ProductEvent.id.desc()).limit(10))
     return result.scalars().all()
