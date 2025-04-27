@@ -12,7 +12,7 @@ async def dedup_redis(key: str):
     """First stage of deduplication. Redis hash"""
     dkey = xxhash.xxh3_64(key).hexdigest()
     if not await r.exists(dkey):
-        await r.set(name=dkey, value=dkey, ex=36288000)
+        await r.set(name=dkey, value=dkey, ex=604800)
         return True
     else:
         return False
