@@ -4,8 +4,7 @@ from sqlalchemy.future import select
 
 from core import db_dependency
 from models import ProductEvent
-from core import r
-from core import bf
+from core import r, bf
 
 
 async def dedup_redis(key: str):

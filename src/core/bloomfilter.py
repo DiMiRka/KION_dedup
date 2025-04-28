@@ -62,5 +62,4 @@ class BloomFilter(object):
         return int(k)
 
 
-# Пример использования
 bf = BloomFilter(10000, 0.01)
